@@ -14,7 +14,7 @@ Inspection environment: Python 3.13.5, NumPy 2.1.3 and SciPy 1.15.3. Verificatio
 
 ## Data and preprocessing
 
-Use [Speech Commands](https://www.tensorflow.org/datasets/catalog/speech_commands) or the paper's spoken-word resources. CSV columns are `audio,label,speaker,split`, with relative WAV/FLAC paths, zero-based vocabulary IDs and roles `train,dev,anchor,support,accept,query,background`. Preserve original-utterance identity and keep enrollment speakers outside source training/development. The nominal enrollment uses 24 support and 16 distinct acceptance recordings plus 32 development anchors. Query labels never select candidates. Background rows are complete audio streams linked to their evaluated speaker. A workload CSV supplies `time_seconds,slack_ms,workspace_bytes`.
+Use [Speech Commands](https://www.tensorflow.org/datasets/catalog/speech_commands) or the paper's spoken-word resources. CSV columns are `audio,label,speaker,split`, with relative WAV/FLAC paths, zero-based vocabulary IDs and roles `train,dev,anchor,support,accept,query,background`. Preserve original-utterance identity and keep enrollment speakers outside source training/development. The nominal enrollment uses 24 support and 16 distinct acceptance recordings plus 32 development anchors. Query labels never select candidates. Background rows are complete audio streams linked to their evaluated speaker. Create the workload CSV at `data/workload.csv`, the path read from `config.json` (`workload`). Its columns are `time_seconds,slack_ms,workspace_bytes`; times are seconds, scheduling slack is milliseconds and workspace is bytes.
 
 ```bash
 python -m earadapt prepare --input data/speech.csv --config config.json --output runs/full
